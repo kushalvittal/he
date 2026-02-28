@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Just One Question 😌</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            color: white;
+            transition: 1s;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background: #ff4e78;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background: #ff1e56;
+        }
+
+        #noBtn {
+            background: #444;
+            color: white;
+            position: absolute;
+        }
+
+        .fade-text {
+            font-size: 28px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .glow {
+            color: #ff4e78;
+            text-shadow: 0 0 15px #ff4e78;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff4e78;
+            border-radius: 50%;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh); opacity: 1; }
+            to { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Do you trust me… just a little? 😌</h1>
+
+    <button id="yesBtn" onclick="startMystery()">Maybe I do 😉</button>
+    <button id="noBtn">Not sure 😏</button>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", function() {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    function startMystery() {
+        document.body.innerHTML = `
+            <div class="fade-text">Good choice… 😌</div>
+        `;
+
+        setTimeout(() => {
+            document.body.innerHTML = `
+                <div class="fade-text">Now don’t overthink this…</div>
+            `;
+        }, 2500);
+
+        setTimeout(() => {
+            document.body.innerHTML = `
+                <div class="fade-text glow">
+                    I just wanted to remind you…<br><br>
+                    you look really good when you smile 😊
+                </div>
+            `;
+            createSparks();
+        }, 5000);
+    }
+
+    function createSparks() {
+        setInterval(() => {
+            const spark = document.createElement("div");
+            spark.classList.add("spark");
+            spark.style.left = Math.random() * window.innerWidth + "px";
+            spark.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(spark);
+
+            setTimeout(() => {
+                spark.remove();
+            }, 4000);
+        }, 150);
+    }
+</script>
+
+</body>
+</html>
